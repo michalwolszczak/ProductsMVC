@@ -1,0 +1,45 @@
+﻿@using DatabaseService.Entities;
+@{
+    ViewData["Title"] = "Products";
+}
+@model IEnumerable<Product>
+
+
+<div class="container p-3">
+
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1>Products</h1>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12 table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var product in Model)
+                    {
+                        <tr>
+                            <td>
+                                @product.Name
+                            </td>
+                            <td>
+                                @product.Description
+                            </td>
+                            <td>
+                                @product.Price
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
