@@ -12,22 +12,24 @@ namespace ProductsMVC.Controllers
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, HttpClient httpClient)
         {
             _logger = logger;
             _configuration = configuration;
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(_configuration.GetValue<string>("APIBaseAddress")); 
+            _httpClient = httpClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var products = new List<Product>();
-            var response = _httpClient.GetAsync(_httpClient.BaseAddress + "/products").Result;
+
+            var apiUrl = new Uri(_configuration.GetValue<string>("APIBaseAddress"));
+
+            var response = await _httpClient.GetAsync(apiUrl + "/products");
             if (response.IsSuccessStatusCode)
             {
-                var data = response.Content.ReadAsStringAsync().Result;
-                products = JsonConvert.DeserializeObject<List<Product>>(data);
+                var responseData = await response.Content.ReadAsStringAsync();
+                products = JsonConvert.DeserializeObject<List<Product>>(responseData);
             }
             return View(products);
         }

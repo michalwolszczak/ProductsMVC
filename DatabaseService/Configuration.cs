@@ -12,7 +12,7 @@ namespace DatabaseService
     public sealed class Configuration
     {
         private static Configuration _instance;
-        public MapperConfiguration MapperConfiguration;
+        public MapperConfiguration MapperConfiguration { get; set; }
 
         private Configuration() 
         {

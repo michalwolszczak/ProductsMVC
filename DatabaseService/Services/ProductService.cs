@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DatabaseService.Entities;
+using DatabaseService.Helpers;
 using DatabaseService.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,7 +26,7 @@ namespace DatabaseService.Services
         private readonly ProductsDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly Configuration _config;
-        private readonly XmlHelper _xmlHelper;
+        private readonly IXmlHelper _xmlHelper;
 
         public ProductService()
         {
